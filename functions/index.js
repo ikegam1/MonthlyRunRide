@@ -7,6 +7,7 @@ const {Card, Suggestion} = require('dialogflow-fulfillment');
 const config = require('./.env.json');
 const CLIENT_ID = config.client_id;
 const mysql = require('mysql');
+const toDay = new Date();
 var userId = '';
 
 // MySQLとのコネクションの作成
@@ -24,6 +25,24 @@ const app = dialogflow({
 	  clientId: CLIENT_ID,
 })
 
+function getActivityKm(m,d,y){
+	return 100;
+}
+
+function checkUUID(_userId){
+	connection.query("SELECT * FROM users where ?", {uuid: _userId}, function (err, result, fields) {
+            if (err) throw err;
+	    if (result.length < 1){
+	        connection.query("insert into users set ?",{uuid:_userId, metric:"km"},function(err2,result,fields){
+                if (err2) throw err2;
+	        console.log(result);
+		return false;
+    	  });
+	    }
+        });
+	return true;
+}
+
 app.intent('Default Welcome Intent', conv => {
 	  if (userId in conv.user.storage) {
 	     userId = conv.user.storage.userId;
@@ -34,14 +53,10 @@ app.intent('Default Welcome Intent', conv => {
 	  }
 	  console.log(conv.user.storage)
 	  //userId = conv.user.id;
-	  if (conv.user.last && conv.user.last.seen) {
-	      const list = conv.user.storage.list || [];
-	      const keepingMessage = (list.length > 1 && `${list.length}個のメモを覚えてますよ。`)
-	        || (list.length === 1 && `1個メモを記録しています。`)
-	        '';
-	      conv.ask(`おかえりなさい！${keepingMessage || ''}どうしましょう？メモを聞く場合は、メモ参照、メモする場合は、メモして、と言ってください。`);
+	  if (checkUUID(userId)){
+	      conv.ask(`おかえりなさい！${toDay.getMonth()}は`+getActivityKm(toDay.getMonth(),false,false)+`km走りました。走行距離を記録、または記録を見ると言ってください。`);
 	  } else {
-	      conv.ask(`はじめまして！メモアプリへようこそ！どうしましょう？`);
+	      conv.ask(`はじめまして！月間走行距離アプリへようこそ！走行距離を記録、または記録を見ると言ってください。`);
 	  }
 });
 
