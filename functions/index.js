@@ -4,8 +4,8 @@ const functions = require('firebase-functions');
 const { dialogflow, SignIn } = require('actions-on-google');
 const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
-const CLIENT_ID = '851188982183-i2jb4rq6qnuardi3v2sfs1500n1onnra.apps.googleusercontent.com'
 const config = require('./.env.json');
+const CLIENT_ID = config.client_id;
 const mysql = require('mysql');
 var userId = '';
 
