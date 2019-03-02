@@ -1,0 +1,13 @@
+{
+  welcome: {
+    activeuser1: {
+      ssml: function(){ return `<speak>おつかれさまです！<break />${toDay.format("M")}がつは<emphasis>${_cnt}回</emphasis>のアクティビティで<emphasis>${_km}キロメートル</emphasis>走りました。<emphasis level="strong">走行を記録</emphasis><emphasis level="reduced">または</emphasis><emphasis level="strong">記録を見る</emphasis><break />と言ってください。</speak>`;}
+    },
+    activeuser2: {
+      ssml: function(){ return `<speak>月間走行距離アプリへようこそ！<emphasis level="strong">走行を記録</emphasis><emphasis level="reduced">または</emphasis><emphasis level="strong">記録を見る</emphasis><break />と言ってください。</speak>`;}
+    },
+    annonymous: {
+      ssml: function(){ return `<speak>月間走行距離アプリへようこそ！匿名ユーザーの場合は記録が保存されません。<emphasis level="strong">走行を記録</emphasis><break />と言ってください。</speak>`;}
+    }
+  }
+}

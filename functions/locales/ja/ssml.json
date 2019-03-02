@@ -1,0 +1,13 @@
+{
+  welcome: {
+    activeuser1: {
+      ssml: "function(){ return `<speak>おつかれさまです！</speak>`;}"
+    },
+    activeuser2: {
+      ssml: "function(){ return `<speak>おつかれさまです！</speak>`;}"
+    },
+    annonymous: {
+      ssml: function(){ return `<speak>月間走行距離アプリへようこそ！匿名ユーザーの場合は記録が保存されません。<emphasis level="strong">走行を記録</emphasis><break />と言ってください。</speak>`;}
+    }
+  }
+}
